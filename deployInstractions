@@ -1,0 +1,9 @@
+1) Foreign key form sys_account.type_id to account_type.type_id
+//change enum types to varchar types
+2)ALTER TABLE `account_types` CHANGE `account_type_status` `account_type_status` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '1' COMMENT '0=inactive, 1=active';
+3)ALTER TABLE `sys_accounts` CHANGE `account_register_email_sent` `account_register_email_sent` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '0=not sent, 1=sent', CHANGE `account_status` `account_status` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '0=inactive, 1=active, 2=onhold, 8=deleted';
+//changed country_status form enum to varchar
+4)ALTER TABLE `countries` CHANGE `country_status` `country_status` VARCHAR(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '0=hidden, 1=visible';
+//added foreign key form sys_account to country
+5)ALTER TABLE `sys_accounts` ADD  FOREIGN KEY (`account_country_id`) REFERENCES `countries`(`country_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
