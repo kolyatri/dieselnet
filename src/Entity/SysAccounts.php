@@ -20,7 +20,7 @@ class SysAccounts
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $accountId;
-
+    
     /**
      * @var string
      *
