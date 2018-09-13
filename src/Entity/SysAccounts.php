@@ -435,9 +435,9 @@ class SysAccounts
         return $this;
     }
 
-    public function getAccountLastUpdate(): ?\DateTimeInterface
+    public function getAccountLastUpdate(): ?string
     {
-        return $this->accountLastUpdate;
+       return $this->accountLastUpdate->format('Y-m-d H:i:s');
     }
 
     public function setAccountLastUpdate(\DateTimeInterface $accountLastUpdate): self
@@ -471,9 +471,9 @@ class SysAccounts
         return $this;
     }
 
-    public function getAccountCreatedOn(): ?\DateTimeInterface
+    public function getAccountCreatedOn(): ?string
     {
-        return $this->accountCreatedOn;
+        return $this->accountCreatedOn->format('Y-m-d H:i:s');
     }
 
     public function setAccountCreatedOn(\DateTimeInterface $accountCreatedOn): self
