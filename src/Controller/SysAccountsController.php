@@ -55,9 +55,10 @@ final class SysAccountsController extends FOSRestController
      */
     public function getSysAccounts(): Response
     {
-        $sysAccounts = $this->sysAccountsService->getAllSysAccounts();
+        $sysAccounts = $this->sysAccountsService->getAllSysAccounts();        
+        $jsonContent = $this->serializer->serialize($sysAccounts, 'json');        
         
-        $jsonContent = $this->serializer->serialize($sysAccounts, 'json');
+        
         // In case our GET was a success we need to return a 200 HTTP OK response with the collection of article object
         return new Response($jsonContent);
         //$view = View::create();

@@ -36,4 +36,15 @@ final class SysAccountsRepository
         return $this->objectRepository->findAll();        
         //return array("Russia","England");
     }
+
+    /**
+     * @return SysAccounts|null
+     * @param array $where
+     */
+    public function findOneBy($where): ?SysAccounts
+    {
+        //$result = $this->objectRepository->findOneBy($where);
+        //var_dump($result[0]->getAccountId());
+        return $this->objectRepository->findOneBy($where);              
+    }
 }

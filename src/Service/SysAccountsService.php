@@ -37,4 +37,14 @@ final class SysAccountsService
         //return array("Russia","England");
     }
 
+     /**
+     * @return SysAccounts|null
+     * @param array $where
+     */
+    public function getOneSysAccount($where): ?SysAccounts
+    {
+        return $this->sysAccountsRepository->findOneBy($where);
+        
+    }
+
 }
