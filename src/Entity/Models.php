@@ -52,5 +52,58 @@ class Models
      */
     private $modelBrand;
 
+    public function getModelId(): ?int
+    {
+        return $this->modelId;
+    }
+
+    public function getModelValue(): ?string
+    {
+        return $this->modelValue;
+    }
+
+    public function setModelValue(string $modelValue): self
+    {
+        $this->modelValue = $modelValue;
+
+        return $this;
+    }
+
+    public function getModelDescription(): ?string
+    {
+        return $this->modelDescription;
+    }
+
+    public function setModelDescription(string $modelDescription): self
+    {
+        $this->modelDescription = $modelDescription;
+
+        return $this;
+    }
+
+    public function getModelStatus(): ?string
+    {
+        return $this->modelStatus;
+    }
+
+    public function setModelStatus(string $modelStatus): self
+    {
+        $this->modelStatus = $modelStatus;
+
+        return $this;
+    }
+
+    public function getModelBrand(): ?Brands
+    {
+        return $this->modelBrand;
+    }
+
+    public function setModelBrand(?Brands $modelBrand): self
+    {
+        $this->modelBrand = $modelBrand;
+
+        return $this;
+    }
+
 
 }

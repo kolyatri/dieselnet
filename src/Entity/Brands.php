@@ -63,5 +63,97 @@ class Brands
      */
     private $brandStatus = '1';
 
+     /**
+     * @var array|null     
+     */
+    private $brandModels;
 
+    public function getBrandId(): ?int
+    {
+        return $this->brandId;
+    }
+
+    public function getBrandValue(): ?string
+    {
+        return $this->brandValue;
+    }
+
+    public function setBrandValue(string $brandValue): self
+    {
+        $this->brandValue = $brandValue;
+
+        return $this;
+    }
+
+    public function getBrandNameEn(): ?string
+    {
+        return $this->brandNameEn;
+    }
+
+    public function setBrandNameEn(string $brandNameEn): self
+    {
+        $this->brandNameEn = $brandNameEn;
+
+        return $this;
+    }
+
+    public function getBrandNameHe(): ?string
+    {
+        return $this->brandNameHe;
+    }
+
+    public function setBrandNameHe(string $brandNameHe): self
+    {
+        $this->brandNameHe = $brandNameHe;
+
+        return $this;
+    }
+
+    public function getBrandNameRu(): ?string
+    {
+        return $this->brandNameRu;
+    }
+
+    public function setBrandNameRu(string $brandNameRu): self
+    {
+        $this->brandNameRu = $brandNameRu;
+
+        return $this;
+    }
+
+    public function getBrandNameAr(): ?string
+    {
+        return $this->brandNameAr;
+    }
+
+    public function setBrandNameAr(string $brandNameAr): self
+    {
+        $this->brandNameAr = $brandNameAr;
+
+        return $this;
+    }
+
+    public function getBrandStatus(): ?string
+    {
+        return $this->brandStatus;
+    }
+
+    public function setBrandStatus(string $brandStatus): self
+    {
+        $this->brandStatus = $brandStatus;
+
+        return $this;
+    }
+
+    public function getBrandModels(): ?array
+    {
+        return $this->brandModels;
+    }
+
+    public function setBrandModels(array $brandModels): self
+    {
+        $this->brandModels = $brandModels;
+
+        return $this;
+    }
 }

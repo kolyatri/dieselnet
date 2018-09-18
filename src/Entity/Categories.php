@@ -73,5 +73,94 @@ class Categories
      */
     private $categoryMaincat;
 
+    public function getCategoryId(): ?int
+    {
+        return $this->categoryId;
+    }
+
+    public function getCategoryValue(): ?string
+    {
+        return $this->categoryValue;
+    }
+
+    public function setCategoryValue(string $categoryValue): self
+    {
+        $this->categoryValue = $categoryValue;
+
+        return $this;
+    }
+
+    public function getCategoryNameEn(): ?string
+    {
+        return $this->categoryNameEn;
+    }
+
+    public function setCategoryNameEn(string $categoryNameEn): self
+    {
+        $this->categoryNameEn = $categoryNameEn;
+
+        return $this;
+    }
+
+    public function getCategoryNameHe(): ?string
+    {
+        return $this->categoryNameHe;
+    }
+
+    public function setCategoryNameHe(string $categoryNameHe): self
+    {
+        $this->categoryNameHe = $categoryNameHe;
+
+        return $this;
+    }
+
+    public function getCategoryNameRu(): ?string
+    {
+        return $this->categoryNameRu;
+    }
+
+    public function setCategoryNameRu(string $categoryNameRu): self
+    {
+        $this->categoryNameRu = $categoryNameRu;
+
+        return $this;
+    }
+
+    public function getCategoryNameAr(): ?string
+    {
+        return $this->categoryNameAr;
+    }
+
+    public function setCategoryNameAr(string $categoryNameAr): self
+    {
+        $this->categoryNameAr = $categoryNameAr;
+
+        return $this;
+    }
+
+    public function getCategoryOrder(): ?int
+    {
+        return $this->categoryOrder;
+    }
+
+    public function setCategoryOrder(int $categoryOrder): self
+    {
+        $this->categoryOrder = $categoryOrder;
+
+        return $this;
+    }
+
+    public function getCategoryMaincat(): ?Maincats
+    {
+        return $this->categoryMaincat;
+    }
+
+    public function setCategoryMaincat(?Maincats $categoryMaincat): self
+    {
+        $this->categoryMaincat = $categoryMaincat;
+
+        return $this;
+    }
+
 
 }

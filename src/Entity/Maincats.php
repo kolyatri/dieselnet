@@ -73,5 +73,109 @@ class Maincats
      */
     private $maincatCatalog;
 
+    /**
+     * @var array|null
+     */
+    private $maincatCategories;
 
+    public function getMaincatId(): ?int
+    {
+        return $this->maincatId;
+    }
+
+    public function getMaincatValue(): ?string
+    {
+        return $this->maincatValue;
+    }
+
+    public function setMaincatValue(string $maincatValue): self
+    {
+        $this->maincatValue = $maincatValue;
+
+        return $this;
+    }
+
+    public function getMaincatNameEn(): ?string
+    {
+        return $this->maincatNameEn;
+    }
+
+    public function setMaincatNameEn(string $maincatNameEn): self
+    {
+        $this->maincatNameEn = $maincatNameEn;
+
+        return $this;
+    }
+
+    public function getMaincatNameHe(): ?string
+    {
+        return $this->maincatNameHe;
+    }
+
+    public function setMaincatNameHe(string $maincatNameHe): self
+    {
+        $this->maincatNameHe = $maincatNameHe;
+
+        return $this;
+    }
+
+    public function getMaincatNameRu(): ?string
+    {
+        return $this->maincatNameRu;
+    }
+
+    public function setMaincatNameRu(string $maincatNameRu): self
+    {
+        $this->maincatNameRu = $maincatNameRu;
+
+        return $this;
+    }
+
+    public function getMaincatNameAr(): ?string
+    {
+        return $this->maincatNameAr;
+    }
+
+    public function setMaincatNameAr(string $maincatNameAr): self
+    {
+        $this->maincatNameAr = $maincatNameAr;
+
+        return $this;
+    }
+
+    public function getMaincatOrder(): ?int
+    {
+        return $this->maincatOrder;
+    }
+
+    public function setMaincatOrder(int $maincatOrder): self
+    {
+        $this->maincatOrder = $maincatOrder;
+
+        return $this;
+    }
+
+    public function getMaincatCatalog(): ?Catalogs
+    {
+        return $this->maincatCatalog;
+    }
+
+    public function setMaincatCatalog(?Catalogs $maincatCatalog): self
+    {
+        $this->maincatCatalog = $maincatCatalog;
+
+        return $this;
+    }
+
+    public function getMaincatCategories(): ?array
+    {
+        return $this->maincatCategories;
+    }
+
+    public function setMaincatCategories(array $maincatCategories): self
+    {
+        $this->maincatCategories = $maincatCategories;
+
+        return $this;
+    }
 }

@@ -1,13 +1,13 @@
 <?php
 namespace App\Repository;
-use App\Entity\Countries;
+use App\Entity\Brands;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 /**
- * Class CountriesRepository
+ * Class BrandsRepository
  * @package App\Repository
  */
-final class CountriesRepository 
+final class BrandsRepository 
 {
     /**
      * @var EntityManagerInterface
@@ -18,13 +18,13 @@ final class CountriesRepository
      */
     private $objectRepository;
     /**
-     * CountriesRepository constructor.
+     * CatalogsRepository constructor.
      * @param EntityManagerInterface $entityManager
      */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->objectRepository = $this->entityManager->getRepository(Countries::class);
+        $this->objectRepository = $this->entityManager->getRepository(Brands::class);
     }
 
     /**
@@ -34,14 +34,5 @@ final class CountriesRepository
     {
         return $this->objectRepository->findAll();
         //return array("Russia","England");
-    }
-
-    /**
-     * @return Countries|null
-     * @param array $whereв
-     */
-    public function findOneBy($where): ?Countries
-    {
-        return $this->objectRepository->findOneBy($where);              
     }
 }

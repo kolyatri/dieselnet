@@ -47,4 +47,13 @@ final class SysAccountsRepository
         //var_dump($result[0]->getAccountId());
         return $this->objectRepository->findOneBy($where);              
     }
+
+    /**
+     * @param SysAccounts $sysAccounts
+     */
+    public function save(SysAccounts $sysAccounts): void
+    {
+        $this->entityManager->persist($sysAccounts);
+        $this->entityManager->flush();
+    }
 }

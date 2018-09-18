@@ -35,4 +35,13 @@ final class AccountTypesRepository
         return $this->objectRepository->findAll();
         //return array("Dealer","Buisnessman");
     }
+
+    /**
+     * @return AccountTypes|null
+     * @param array $where
+     */
+    public function findOneBy($where): ?AccountTypes
+    {
+        return $this->objectRepository->findOneBy($where);              
+    }
 }
