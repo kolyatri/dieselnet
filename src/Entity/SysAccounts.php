@@ -3,15 +3,28 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * SysAccounts
  *
  * @ORM\Table(name="sys_accounts", indexes={@ORM\Index(name="account_password", columns={"account_password"}), @ORM\Index(name="account_account_type_id", columns={"account_account_type_id"}), @ORM\Index(name="account_country_id", columns={"account_country_id"})})
  * @ORM\Entity
+ * @UniqueEntity(fields={"accountUniqueCode"}, message="accountUniqueCode must be unique")
+ * @UniqueEntity(fields={"accountEmail"}, message="accountEmail must be unique")
+ * @UniqueEntity(fields={"accountTelephone"}, message="accountTelephone must be unique")
  */
 class SysAccounts
 {
+    public function __construct()
+    {
+        $this->setAccountCreatedOn(new \DateTime());
+        $this->setAccountLastUpdate(new \DateTime());
+        $this->setAccountStatus("0");
+    }
+
     /**
      * @var int
      *
@@ -23,99 +36,117 @@ class SysAccounts
     
     /**
      * @var string
-     *
-     * @ORM\Column(name="account_unique_code", type="string", length=5, nullable=false)
+     * 
+     * @Assert\NotBlank()
+     * 
+     * @ORM\Column(name="account_unique_code", type="string", length=5, nullable=false, unique=true)
      */
     private $accountUniqueCode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="account_verify_code", type="string", length=255, nullable=false)
+     * @ORM\Column(name="account_verify_code", type="string", length=255, nullable=true)
      */
     private $accountVerifyCode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="account_api_token", type="string", length=255, nullable=false)
+     * @ORM\Column(name="account_api_token", type="string", length=255, nullable=true)
      */
     private $accountApiToken;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="account_vat", type="string", length=255, nullable=false)
+     * @ORM\Column(name="account_vat", type="string", length=255, nullable=true)
      */
     private $accountVat;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="account_name", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(groups={"updateOrRegistrate"})
+     *
+     * @ORM\Column(name="account_name", type="string", length=255, nullable=true)
      */
     private $accountName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="account_url_name", type="string", length=255, nullable=false)
+     * @ORM\Column(name="account_url_name", type="string", length=255, nullable=true)
      */
     private $accountUrlName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="account_firstname", type="string", length=255, nullable=false)
+     * @Assert\NotBlank()
+     * 
+     * @ORM\Column(name="account_firstname", type="string", length=255, nullable=true)
      */
     private $accountFirstname;
 
     /**
      * @var string
+     * 
+     * @Assert\NotBlank()
      *
-     * @ORM\Column(name="account_lastname", type="string", length=255, nullable=false)
+     * @ORM\Column(name="account_lastname", type="string", length=255, nullable=true)
      */
     private $accountLastname;
 
     /**
      * @var string
+     * 
+     * @Assert\NotBlank()
      *
-     * @ORM\Column(name="account_address", type="string", length=255, nullable=false)
+     * @ORM\Column(name="account_address", type="string", length=255, nullable=true)
      */
     private $accountAddress;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="account_city_place_id", type="string", length=255, nullable=false)
+     * @ORM\Column(name="account_city_place_id", type="string", length=255, nullable=true)
      */
     private $accountCityPlaceId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="account_zipcode", type="string", length=255, nullable=false)
+     * @ORM\Column(name="account_zipcode", type="string", length=255, nullable=true)
      */
     private $accountZipcode;
 
     /**
      * @var string
+     * 
+     * @Assert\NotBlank(groups={"startDemoRegistration"}) 
+     * @Assert\Regex(
+     *     pattern="/^\+\d{8,16}$/",
+     *     match=true,
+     *     message="Your telephone number is wrong",
+     *     groups={"startDemoRegistration"}
+     * )
      *
-     * @ORM\Column(name="account_telephone", type="string", length=255, nullable=false)
+     * @ORM\Column(name="account_telephone", type="string", length=255, nullable=false, unique=true)
      */
-    private $accountTelephone;
+    private $accountTelephone = "";
 
     /**
      * @var string
      *
-     * @ORM\Column(name="account_fax", type="string", length=255, nullable=false)
+     * @ORM\Column(name="account_fax", type="string", length=255, nullable=true)
      */
     private $accountFax;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="account_website", type="string", length=255, nullable=false)
+     * @ORM\Column(name="account_website", type="string", length=255, nullable=true)
      */
     private $accountWebsite;
 
@@ -129,21 +160,40 @@ class SysAccounts
     /**
      * @var string
      *
-     * @ORM\Column(name="account_about", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="account_about", type="text", length=65535, nullable=true)
      */
     private $accountAbout;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(name="account_email", type="string", length=255, nullable=true)
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = false
+     * )
+     * 
+     * @ORM\Column(name="account_email", type="string", length=255, nullable=true, unique=true)
      */
     private $accountEmail;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="account_password", type="string", length=80, nullable=false)
+     * 
+     * @Assert\NotBlank(groups={"passwordOriginal"})
+     * @Assert\Length(
+     *      min = 8,
+     *      max = 20,
+     *      groups={"passwordOriginal"}
+     * )
+     * 
+     */
+    private $accountPasswordOriginal = "";
+
+    /**
+     * @var string
+     * 
+     * @ORM\Column(name="account_password", type="string", length=80, nullable=true)
      */
     private $accountPassword;
 
@@ -178,9 +228,9 @@ class SysAccounts
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="account_created_on", type="datetime", nullable=false, options={"default"="CURRENT_TIMESTAMP"})
+     * @ORM\Column(name="account_created_on", type="datetime", nullable=false)
      */
-    private $accountCreatedOn = 'CURRENT_TIMESTAMP';
+    private $accountCreatedOn;
 
     /**
      * @var \AccountTypes
@@ -407,6 +457,18 @@ class SysAccounts
     public function setAccountEmail(?string $accountEmail): self
     {
         $this->accountEmail = $accountEmail;
+
+        return $this;
+    }
+
+    public function getAccountPasswordOriginal(): ?string
+    {
+        return $this->accountPasswordOriginal;
+    }
+
+    public function setAccountPasswordOriginal(string $accountPasswordOriginal): self
+    {
+        $this->accountPasswordOriginal = $accountPasswordOriginal;
 
         return $this;
     }

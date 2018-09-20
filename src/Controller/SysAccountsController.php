@@ -68,8 +68,12 @@ final class SysAccountsController extends FOSRestController
         $this->sysAccountsService = $sysAccountsService;
 
         $apiToken = $this->request->headers->get('Api-token');
-        $where = array('accountApiToken' => $apiToken);
-        $this->sysAccount = $this->sysAccountsService->getOneSysAccount($where);        
+        //if we are here, means we passed rqeust listener and if no api-token 
+        //the route contains startTelephoneRegistration OR finishTelephoneRegistration
+        if($apiToken){
+            $where = array('accountApiToken' => $apiToken);
+            $this->sysAccount = $this->sysAccountsService->getOneSysAccount($where);
+        }        
     }
 
     /**
@@ -79,12 +83,7 @@ final class SysAccountsController extends FOSRestController
      */
     //public function getOneSysAccount(Request $request): Response
     public function getOneSysAccount(): Response
-    {
-        //$apiToken = $request->headers->get('Api-token');
-        //$where = array('accountApiToken' => $apiToken);
-        //$sysAccount = $this->sysAccountsService->getOneSysAccount($where);        
-        //$jsonContent = $this->serializer->serialize($sysAccount, 'json');   
-        //$jsonContent = $this->serializer->serialize($sysAccount, 'json');   
+    {       
         $jsonContent = $this->serializer->serialize($this->sysAccount, 'json');   
         
         return new Response($jsonContent);
@@ -98,8 +97,7 @@ final class SysAccountsController extends FOSRestController
     public function putSysAccount(): Response
     {
         $bodyJsonData = $this->request->getContent();
-        $bodyData =  json_decode($bodyJsonData, true);
-        //var_dump($bodyData);die;
+        $bodyData =  json_decode($bodyJsonData, true);             
 
         if(!array_key_exists('accountCountry', $bodyData) || !array_key_exists('accountAccountType', $bodyData)){
             throw new BadRequestHttpException("No params 'accountCountry' or 'accountAccountType'");
@@ -109,6 +107,7 @@ final class SysAccountsController extends FOSRestController
 
         unset($bodyData['accountCountry']);
         unset($bodyData['accountAccountType']);
+        unset($bodyData['accountTelephone']);
 
         $bodyJsonData = json_encode($bodyData);
         $this->serializer->deserialize($bodyJsonData, SysAccounts::class, 'json', array('object_to_populate' => $this->sysAccount));
@@ -121,19 +120,39 @@ final class SysAccountsController extends FOSRestController
 
         $jsonContent = $this->serializer->serialize(array('account' => $this->sysAccount),'json');
 
-        return new Response($jsonContent);
-
-        /*$sysAccount = $this->articleRepository->findById($articleId);
-        if ($article) {
-            $article->setTitle($request->get('title'));
-            $article->setContent($request->get('content'));
-            $this->articleRepository->save($article);
-        }*/
-        // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
-        //return View::create($article, Response::HTTP_OK);
-        //return View::create($article, Response::HTTP_OK);
+        return new Response($jsonContent);        
     }
 
+    /**
+     * Create SysAccount resource
+     * @Rest\Post("/startTelephoneRegistration")
+     * @return Response
+     */
+    public function startTelephoneRegistration(): Response
+    {
+        $this->sysAccount = new SysAccounts();
+        $bodyJsonData = $this->request->getContent();  
+        $this->serializer->deserialize($bodyJsonData, SysAccounts::class, 'json', array('object_to_populate' => $this->sysAccount));
+        
+        $this->sysAccount = $this->sysAccountsService->addDemoSysAccount($this->sysAccount);
 
+        $jsonContent = $this->serializer->serialize(array('account' => $this->sysAccount),'json');
+        return new Response($jsonContent);
+    }
 
+    /**
+     * Create SysAccount resource
+     * @Rest\Post("/finishTelephoneRegistration")
+     * @return Response
+     */
+    public function finishTelephoneRegistration(): Response
+    {
+        $bodyJsonData = $this->request->getContent();  
+        $bodyData = json_decode($bodyJsonData, true);
+        
+        $this->sysAccount = $this->sysAccountsService->verifyDemoSysAccount($bodyData);
+
+        $jsonContent = $this->serializer->serialize(array('account' => $this->sysAccount),'json');
+        return new Response($jsonContent);
+    }
 }

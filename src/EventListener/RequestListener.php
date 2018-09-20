@@ -1,5 +1,6 @@
 <?php
 namespace App\EventListener;
+use App\Entity\SysAccounts;
 use App\Service\SysAccountsService;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
@@ -26,9 +27,10 @@ class RequestListener
     public function validateSecretAndApiToken(GetResponseEvent $event)
     {       
         $request = $event->getRequest();
-        $uri = $request ->getRequestUri();        
+        $uri = $request ->getRequestUri();
 
         if (strpos($uri, '/api/') !== false) {
+           
             $secret = $request->headers->get('Secret');
             $appSecret = getenv('APP_SECRET');
             
@@ -36,15 +38,31 @@ class RequestListener
                 throw new AccessDeniedHttpException('Forbidden');
             }
 
-            $apiToken = $request->headers->get('Api-token');
-            if(!$apiToken){
-                throw new AccessDeniedHttpException('Forbidden');
-            }
+            $apiToken = $request->headers->get('Api-token');      
+            
 
-            $sysAccount = $this->sysAccountsService->getOneSysAccount(array('accountApiToken' => $apiToken));
-            if(!$sysAccount){
-                throw new AccessDeniedHttpException('Forbidden');
-            }         
+            $pos1 = strpos($uri, 'startTelephoneRegistration');
+            $pos2 = strpos($uri, 'finishTelephoneRegistration');
+
+            //the case when need check API TOKEN
+            if ($pos1 === false && $pos2 === false) {            
+                $this->validateApiToken($apiToken);
+            } 
+        }
+    }
+
+    //validate token in DB
+    private function validateApiToken($apiToken)
+    {
+        if(!$apiToken){
+            throw new AccessDeniedHttpException('Forbidden');
+        }
+       
+        $where = array('accountApiToken' => $apiToken);
+        $sysAccount = $this->sysAccountsService->getOneSysAccount($where);        
+          
+        if(!$sysAccount){       
+            throw new AccessDeniedHttpException('Forbidden');
         }
     }
 }
