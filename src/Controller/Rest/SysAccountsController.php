@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Rest;
 use App\Service\SysAccountsService;
 use App\Entity\SysAccounts;
 //use App\Domain\Model\Article\ArticleRepositoryInterface;

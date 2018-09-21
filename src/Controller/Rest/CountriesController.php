@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Rest;
 use App\Service\CountriesService;
 use App\Entity\Countries;
 //use App\Domain\Model\Article\ArticleRepositoryInterface;
