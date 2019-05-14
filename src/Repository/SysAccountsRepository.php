@@ -33,8 +33,7 @@ final class SysAccountsRepository
      */
     public function findAll(): array
     {
-        return $this->objectRepository->findAll();        
-        //return array("Russia","England");
+        return $this->objectRepository->findAll();
     }
 
     /**
@@ -43,8 +42,6 @@ final class SysAccountsRepository
      */
     public function findOneBy($where): ?SysAccounts
     {
-        //$result = $this->objectRepository->findOneBy($where);
-        //var_dump($result[0]->getAccountId());
         return $this->objectRepository->findOneBy($where);              
     }
 

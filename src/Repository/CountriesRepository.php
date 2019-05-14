@@ -33,7 +33,6 @@ final class CountriesRepository
     public function findAll(): array
     {
         return $this->objectRepository->findAll();
-        //return array("Russia","England");
     }
 
     /**

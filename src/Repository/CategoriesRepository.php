@@ -28,11 +28,19 @@ final class CategoriesRepository
     }
 
     /**
+     * @return Categories|null
+     * @param array $where
+     */
+    public function findOneBy($where): ?Categories
+    {        
+        return $this->objectRepository->findOneBy($where);              
+    }
+
+    /**
      * @return array
      */
     public function findBy($where): array
     {
         return $this->objectRepository->findBy($where);
-        //return array("Russia","England");
     }
 }

@@ -22,7 +22,7 @@ class MyValidator{
     }
 
 
-    public function validate($entity, $param2 = null, $groups = array()){       
+    public function validate($entity, $groups = array()){       
          //validate sysAccount fields common for update or for complete registration
          $errors = $this->validator->validate($entity, null, $groups);
 

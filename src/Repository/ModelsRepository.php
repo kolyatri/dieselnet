@@ -33,6 +33,5 @@ final class ModelsRepository
     public function findBy($where): array
     {
         return $this->objectRepository->findBy($where);
-        //return array("Russia","England");
     }
 }

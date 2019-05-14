@@ -28,11 +28,19 @@ final class MaincatsRepository
     }
 
     /**
+     * @return Maincats|null
+     * @param array $where
+     */
+    public function findOneBy($where): ?Maincats
+    {        
+        return $this->objectRepository->findOneBy($where);              
+    }
+
+    /**
      * @return array
      */
     public function findBy($where): array
     {
-        return $this->objectRepository->findBy($where);
-        //return array("Russia","England");
+        return $this->objectRepository->findBy($where); 
     }
 }

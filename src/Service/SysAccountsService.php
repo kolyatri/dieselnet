@@ -65,7 +65,6 @@ final class SysAccountsService
     public function getAllSysAccounts(): ?array
     {
         return $this->sysAccountsRepository->findAll();
-        //return array("Russia","England");
     }
 
     /**

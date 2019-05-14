@@ -33,6 +33,15 @@ final class CatalogsRepository
     public function findAll(): array
     {
         return $this->objectRepository->findAll();
-        //return array("Russia","England");
     }
+
+    /**
+     * @return Catalogs|null
+     * @param array $where
+     */
+    public function findOneBy($where): ?Catalogs
+    {        
+        return $this->objectRepository->findOneBy($where);              
+    }
+
 }

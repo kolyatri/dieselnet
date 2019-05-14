@@ -33,7 +33,6 @@ final class AccountTypesRepository
     public function findAll(): array
     {
         return $this->objectRepository->findAll();
-        //return array("Dealer","Buisnessman");
     }
 
     /**

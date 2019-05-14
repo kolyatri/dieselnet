@@ -50,8 +50,6 @@ final class CommonService
         BrandsRepository $brandsRepository,
         ModelsRepository $modelsRepository
     ){
-    //public function __construct(){
-        //$this->countriesRepository = new CountriesRepository();
         $this->catalogsRepository = $catalogsRepository;      
         $this->maincatsRepository = $maincatsRepository;     
         $this->categoriesRepository = $categoriesRepository;    

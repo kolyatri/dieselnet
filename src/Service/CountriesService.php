@@ -29,8 +29,6 @@ final class CountriesService
         CountriesRepository $countriesRepository,
         AccountTypesRepository $accountTypesRepository
     ){
-    //public function __construct(){
-        //$this->countriesRepository = new CountriesRepository();
         $this->countriesRepository = $countriesRepository;
         $this->accountTypesRepository = $accountTypesRepository;
     }
@@ -41,7 +39,6 @@ final class CountriesService
     public function getAllCountries(): ?array
     {
         return $this->countriesRepository->findAll();
-        //return array("Russia","England");
     }
 
     /**
@@ -50,7 +47,6 @@ final class CountriesService
     public function getAllCountriesAndAccountTypes(): ?array
     {        
         return array_merge($this->countriesRepository->findAll(), $this->accountTypesRepository->findAll());
-        //return array("Russia","England");
     }
 
 }
